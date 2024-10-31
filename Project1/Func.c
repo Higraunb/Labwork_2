@@ -101,35 +101,35 @@ void Quick_Sort(int* array, int left, int right)
   if (right > index)
     Quick_Sort(array, index + 1, right);
 }
-void Merge_Sort(int* array, int left, int right)
+void Merge_Sort(int* a, int l, int r)
 {
   {
-    if (left == right) return; // границы сомкнулись
-    int mid = (left + right) / 2; // определяем середину последовательности
+    if (l == r) return; // границы сомкнулись
+    int mid = (l + r) / 2; // определяем середину последовательности
     // и рекурсивно вызываем функцию сортировки для каждой половины
-    Merge_Sort(array, left, mid);
-    Merge_Sort(array, mid + 1, right);
-    int counter = left;  // начало первого пути
-    int counter_2 = mid + 1; // начало второго пути
-    int* tmp = (int*)malloc(right * sizeof(int)); // дополнительный массив
-    for (int step = 0; step < right - left + 1; step++) // для всех элементов дополнительного массива
+    Merge_Sort(a, l, mid);
+    Merge_Sort(a, mid + 1, r);
+    int i = l;  // начало первого пути
+    int j = mid + 1; // начало второго пути
+    int* tmp = (int*)malloc(r * sizeof(int)); // дополнительный массив
+    for (int step = 0; step < r - l + 1; step++) // для всех элементов дополнительного массива
     {
       // записываем в формируемую последовательность меньший из элементов двух путей
       // или остаток первого пути если j > r
-      if ((counter_2 > right) || ((counter <= mid) && (array[counter] < array[counter_2])))
+      if ((j > r) || ((i <= mid) && (a[i] < a[j])))
       {
-        tmp[step] = array[counter];
-        counter++;
+        tmp[step] = a[i];
+        i++;
       }
       else
       {
-        tmp[step] = array[counter_2];
-        counter_2++;
+        tmp[step] = a[j];
+        j++;
       }
     }
     // переписываем сформированную последовательность в исходный массив
-    for (int step = 0; step < right - left + 1; step++)
-      array[left + step] = tmp[step];
+    for (int step = 0; step < r - l + 1; step++)
+      a[l + step] = tmp[step];
   }
 }
 void Shell_Sort(int* array, int len_of_array)

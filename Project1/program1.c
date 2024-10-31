@@ -15,7 +15,7 @@ int main()
 	int count_of_numbers = 0, number_input_selection = 0, user_selection_sort = 0,
 		user_selection = 0, size_of_file = 0, user_selection_reset = 0,
 		min_ch = 0, max_ch = 0, random_number = 0, entered_number = 1, s = 0,
-		counter = 0, counter_2 = 0, * array_of_number = 0 ,*array_to_copy = 0;
+		counter = 0, counter_2 = 0, * array_of_number = 0 ,*array_to_copy = 0, *array_to_output = 0;
 	char Filename[100];
 	double time_spend = 0.0;
 	clock_t begin = 0, end = 0;
@@ -34,6 +34,7 @@ back:
 		scanf("%d", &count_of_numbers);
 		array_of_number = (int*)malloc(count_of_numbers * sizeof(int));
 		array_to_copy = (int*)malloc(count_of_numbers * sizeof(int));
+		array_to_output = (int*)malloc(count_of_numbers * sizeof(int));
 		if (array_of_number != NULL)
 		{
 			for (int counter = 0; counter < count_of_numbers; counter++)
@@ -48,6 +49,7 @@ back:
 		count_of_numbers = 0;
 		array_of_number = (int*)malloc(100000 * sizeof(int));
 		array_to_copy = (int*)malloc(100000 * sizeof(int));
+		array_to_output = (int*)malloc(100000 * sizeof(int));
 		printf("Enter numbers, To finish entering, press - 0\n");
 		while (entered_number != 0)
 		{
@@ -78,6 +80,7 @@ back:
 		size_of_file = ftell(file_of_numbers);
 		array_of_number = (int*)malloc(size_of_file * sizeof(int));
 		array_to_copy = (int*)malloc(size_of_file * sizeof(int));
+		array_to_output = (int*)malloc(size_of_file * sizeof(int));
 		for (counter = 0; counter < size_of_file; counter++)
 		{
 			fscanf(file_of_numbers, "%d", array_of_number[counter]);
@@ -95,6 +98,7 @@ while (user_selection_reset == 0)
 {
 	for ( counter = 0; counter < count_of_numbers + size_of_file; counter++)
 	{
+		array_to_output[counter] = array_of_number[counter];
 		array_of_number[counter] = array_to_copy[counter];
 	}
 	system("cls");
@@ -106,8 +110,9 @@ while (user_selection_reset == 0)
 	switch (user_selection)
 	{
 	case 1:
+		//вывод массива
 		for (counter = 0; counter < count_of_numbers; counter++)
-			printf("%d\n", array_of_number[counter]);
+			printf("%d\n", array_to_output[counter]);
 		system("pause");
 		break;
 	case 2:
@@ -157,7 +162,7 @@ while (user_selection_reset == 0)
 		case 4:
 			time_spend = 0.0;
 			begin = clock();
-			Merge_Sort(array_of_number, array_of_number[0], array_of_number[counter + 1]);
+			Merge_Sort(array_of_number,0 ,count_of_numbers - 1);
 			end = clock();
 			time_spend += (double)(end - begin) / CLOCKS_PER_SEC;
 			printf("speed - %lg\n", time_spend);
@@ -167,7 +172,7 @@ while (user_selection_reset == 0)
 		case 5:
 			time_spend = 0.0;
 			begin = clock();
-			Quick_Sort(array_of_number, array_of_number[1], array_of_number[count_of_numbers]);
+			Quick_Sort(array_of_number,0 , count_of_numbers - 1);
 			end = clock();
 			time_spend += (double)(end - begin) / CLOCKS_PER_SEC;
 			printf("speed - %lg\n", time_spend);
@@ -195,10 +200,12 @@ while (user_selection_reset == 0)
 			break;
 		default:
 			printf("Eror\n");
+			system("pause");
 			break;
 		}
 		break;
 	case 3:
+		system("cls");
 		goto back;
 		break;
 	case 4:
@@ -206,6 +213,7 @@ while (user_selection_reset == 0)
 		break;
 	default:
 		printf("Eror\n");
+		system("pause");
 		break;
 	}
 }
