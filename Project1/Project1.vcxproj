@@ -19,7 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="laba2.h" />
+    <ClCompile Include="Func.c" />
+    <ClCompile Include="heder.h" />
     <ClCompile Include="program1.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -15,10 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="laba2.h">
+    <ClCompile Include="heder.h">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="program1.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Func.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
